@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLIXHUB - Your Gateway to Entertainment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0f2e 25%, #0f0f23 50%, #2d1b69 75%, #0a0a0a 100%);
+            background-attachment: fixed;
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated background particles */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: slideDown 1s ease-out;
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #8A2BE2 0%, #DA70D6 50%, #9370DB 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .welcome-message {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            animation: fadeIn 1.5s ease-out 0.3s both;
+        }
+
+        /* Glass morphism base */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(138, 43, 226, 0.1);
+        }
+
+        /* Featured Content Section */
+        .featured-section {
+            margin-bottom: 50px;
+            animation: slideUp 1s ease-out 0.5s both;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #ffffff 0%, #DA70D6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .movie-card {
+            position: relative;
+            padding: 25px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            animation: cardAppear 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .movie-card:nth-child(1) { animation-delay: 0.1s; }
+        .movie-card:nth-child(2) { animation-delay: 0.2s; }
+        .movie-card:nth-child(3) { animation-delay: 0.3s; }
+        .movie-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .movie-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(138, 43, 226, 0.3);
+        }
+
+        .movie-thumbnail {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #2d1b69, #8A2BE2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .movie-thumbnail::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        .movie-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .watch-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #8A2BE2, #DA70D6);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .watch-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .watch-btn:hover::before {
+            left: 100%;
+        }
+
+        .watch-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.4);
+        }
+
+        /* Community Section */
+        .community-section {
+            animation: slideUp 1s ease-out 0.8s both;
+        }
+
+        .community-panel {
+            padding: 40px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .community-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .community-description {
+            font-size: 1.1rem;
+            color: #cccccc;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .telegram-btn {
+            background: linear-gradient(135deg, #0088cc, #0099dd);
+            color: white;
+        }
+
+        .instagram-btn {
+            background: linear-gradient(135deg, #E1306C, #FD1D1D, #F77737);
+            color: white;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
+            }
+            to {
+                text-shadow: 0 0 50px rgba(138, 43, 226, 0.8), 0 0 70px rgba(218, 112, 214, 0.3);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .welcome-message {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+            
+            .movie-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .social-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .social-btn {
+                width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-particles" id="particles"></div>
+    
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="logo">FLIXHUB</h1>
+            <p class="welcome-message">
+                Welcome to FLIXHUB 🎬 Your gateway to endless movies, webseries and live Cricket matches. Grab your popcorn, the show starts here!!
+            </p>
+        </header>
+
+        <!-- Featured Content -->
+        <section class="featured-section">
+            <h2 class="section-title">Featured Content</h2>
+            <div class="movie-grid">
+                <div class="movie-card glass">
+                    <div class="movie-thumbnail">
+                        <img src="https://images.mykhel.com/webp/img/2025/09/ind-pak-asia-cup-2025-live-streaming1-1758460395.jpg" alt="Live Cricket" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+                        🎬
+                    </div>
+                    <h3 class="movie-title">IND vs PAK <h3
+                    <a href="https://livecfdai-mp.slivcdn.com/out/v1/cfed49dc0449444bac761f9dd9155916/std_mdl-700300010_4.m3u8?hdntl=exp=1758947193~acl=*~hmac=1524b37a5f113e68864597fc043080d213c9ba5751cb7abb9e4fb5c00f1d89a5&originpath=/linear/hls/pb/event/RP1mckhwQQChze2hZfnZlA/stream/ebf8ee20-6311-48b1-8a88-af663149409f:SIN2/variant/5f3000588990fd69e822ee104cea52a4/bandwidth/1663838.m3u8" class="watch-btn" target="_blank">Watch Live</a>
+                </div>
+                
+                <div class="movie-card glass">
+                    <div class="movie-thumbnail">
+                        <img src="https://images.mykhel.com/webp/img/2025/09/ind-pak-asia-cup-2025-live-streaming1-1758460395.jpg" alt="Live Cricket" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+                    </div>
+                    <h3 class="movie-title">IND vs PAK <h3
+                    <a href="https://livecfdai-mp.slivcdn.com/out/v1/cfed49dc0449444bac761f9dd9155916/std_mdl-700300010_4.m3u8?hdntl=exp=1758947193~acl=*~hmac=1524b37a5f113e68864597fc043080d213c9ba5751cb7abb9e4fb5c00f1d89a5&originpath=/linear/hls/pb/event/RP1mckhwQQChze2hZfnZlA/stream/ebf8ee20-6311-48b1-8a88-af663149409f:SIN2/variant/5f3000588990fd69e822ee104cea52a4/bandwidth/1663838.m3u8" class="watch-btn" target="_blank">Watch Live</a>
+                </div>
+                
+                <div class="movie-card glass">
+                    <div class="movie-thumbnail">
+                        <img src="https://images.mykhel.com/webp/img/2025/09/ind-pak-asia-cup-2025-live-streaming1-1758460395.jpg" alt="Live Cricket" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+                        📺
+                    </div>
+                    <h3 class="movie-title">IND vs PAK </h3>
+                    <a href="https://livecfdai-mp.slivcdn.com/out/v1/cfed49dc0449444bac761f9dd9155916/std_mdl-700300010_4.m3u8?hdntl=exp=1758947193~acl=*~hmac=1524b37a5f113e68864597fc043080d213c9ba5751cb7abb9e4fb5c00f1d89a5&originpath=/linear/hls/pb/event/RP1mckhwQQChze2hZfnZlA/stream/ebf8ee20-6311-48b1-8a88-af663149409f:SIN2/variant/5f3000588990fd69e822ee104cea52a4/bandwidth/1663838.m3u8" class="watch-btn" target="_blank">Watch Live</a>
+                </div>
+                
+                
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section class="community-section">
+            <div class="community-panel glass">
+                <h2 class="community-title">Join Our Community</h2>
+                <p class="community-description">
+                    Get exclusive content, updates, and connect with fellow movie enthusiasts!
+                </p>
+                <div class="social-buttons">
+                    <a href="https://t.me/+JAkrXg6_kvUyM2Nl" target="_blank" class="social-btn telegram-btn">
+                        Join Us on Telegram
+                    </a>
+                    <a href="https://instagram.com/Smilewithk4hav" target="_blank" class="social-btn instagram-btn">
+                        Follow on Instagram
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Create animated background particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const numberOfParticles = 50;
+
+            for (let i = 0; i < numberOfParticles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Add hover effect to movie cards
+        function addCardInteractions() {
+            const cards = document.querySelectorAll('.movie-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-15px) scale(1.05)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        }
+
+        // Add button click animations
+        function addButtonAnimations() {
+            const buttons = document.querySelectorAll('.watch-btn, .social-btn');
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+        }
+
+        // Initialize all effects when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            addCardInteractions();
+            addButtonAnimations();
+        });
+
+        // Add parallax scrolling effect
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            document.querySelector('.bg-particles').style.transform = `translate3d(0, ${rate}px, 0)`;
+        });
+    </script>
+
+</body>
+</html>
