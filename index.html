@@ -157,6 +157,15 @@
             animation: shimmer 3s infinite;
         }
 
+        .movie-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
         .movie-title {
             font-size: 1.4rem;
             font-weight: 600;
@@ -182,6 +191,7 @@
             text-decoration: none;
             display: inline-block;
             text-align: center;
+            box-sizing: border-box;
         }
 
         .watch-btn::before {
@@ -342,6 +352,15 @@
                 gap: 20px;
             }
             
+            .movie-card {
+                padding: 20px;
+            }
+            
+            .watch-btn {
+                padding: 12px;
+                font-size: 1rem;
+            }
+            
             .social-buttons {
                 flex-direction: column;
                 align-items: center;
@@ -349,6 +368,29 @@
             
             .social-btn {
                 width: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .movie-card {
+                padding: 15px;
+            }
+            
+            .movie-thumbnail {
+                height: 150px;
+            }
+            
+            .watch-btn {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
             }
         }
     </style>
@@ -361,7 +403,10 @@
         <header class="header">
             <h1 class="logo">FLIXHUB</h1>
             <p class="welcome-message">
-               Click on the last button to play match, the show starts here!!
+               Welcome to FLIXHUB here! <br>
+               Stream the latest movies and web series—right here, anytime. <br>
+            Notice: Pc or laptop user click on watch live button and open downloaded file in VLC MEDIA PLAYER
+
             </p>
         </header>
 
@@ -371,31 +416,27 @@
             <div class="movie-grid">
                 <div class="movie-card glass">
                     <div class="movie-thumbnail">
-                        <img src="https://images.mykhel.com/webp/img/2025/09/ind-pak-asia-cup-2025-live-streaming1-1758460395.jpg" alt="Live Cricket" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
-                        🎬
+                        <img src="https://images.mykhel.com/webp/img/2025/09/ind-pak-asia-cup-2025-live-streaming1-1758460395.jpg" alt="Live Cricket">
                     </div>
-                    <h3 class="movie-title">IND vs PAK <h3
-                    <a href="https://livecfdai-mp.slivcdn.com/out/v1/cfed49dc0449444bac761f9dd9155916/std_mdl-700300010_1_289307.ts?m=1758988870" class="watch-btn" target="_blank">Watch Live</a>
+                    <h3 class="movie-title">IND vs PAK</h3>
+                    <a href="https://livecfdai-mp.slivcdn.com/out/v1/cfed49dc0449444bac761f9dd9155916/std_mdl-700300010_4.m3u8?hdntl=exp=1759114172~acl=*~hmac=43e4d320cbc65ceb82a3e1b9950f2088c368c0c9931af182a11641944fb93532&originpath=/linear/hls/pb/event/6dEZMiaVRcGRWf7lwwBO7Q/stream/bfe27558-b910-4c21-b422-aebe66f4ca57:SIN2/variant/5f3000588990fd69e822ee104cea52a4/bandwidth/1663838.m3u8" class="watch-btn" target="_blank">Watch Live</a>
                 </div>
                 
                 <div class="movie-card glass">
                     <div class="movie-thumbnail">
-                        <img src="https://images.mykhel.com/webp/img/2025/09/ind-pak-asia-cup-2025-live-streaming1-1758460395.jpg" alt="Live Cricket" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+                        <img src="https://images.mykhel.com/webp/img/2025/09/ind-pak-asia-cup-2025-live-streaming1-1758460395.jpg" alt="Live Cricket">
                     </div>
-                    <h3 class="movie-title">IND vs PAK <h3
-                    <a href="https://livecfdai-mp.slivcdn.com/out/v1/cfed49dc0449444bac761f9dd9155916/std_mdl-700300010_4.m3u8?hdntl=exp=1758947193~acl=*~hmac=1524b37a5f113e68864597fc043080d213c9ba5751cb7abb9e4fb5c00f1d89a5&originpath=/linear/hls/pb/event/RP1mckhwQQChze2hZfnZlA/stream/ebf8ee20-6311-48b1-8a88-af663149409f:SIN2/variant/5f3000588990fd69e822ee104cea52a4/bandwidth/1663838.m3u8" class="watch-btn" target="_blank">Watch Live</a>
+                    <h3 class="movie-title">IND vs PAK</h3>
+                    <a href="https://livecfdai-mp.slivcdn.com/out/v1/cfed49dc0449444bac761f9dd9155916/std_mdl-700300010_4.m3u8?hdntl=exp=1759114172~acl=*~hmac=43e4d320cbc65ceb82a3e1b9950f2088c368c0c9931af182a11641944fb93532&originpath=/linear/hls/pb/event/6dEZMiaVRcGRWf7lwwBO7Q/stream/bfe27558-b910-4c21-b422-aebe66f4ca57:SIN2/variant/5f3000588990fd69e822ee104cea52a4/bandwidth/1663838.m3u8" class="watch-btn" target="_blank">Watch Live</a>
                 </div>
                 
                 <div class="movie-card glass">
                     <div class="movie-thumbnail">
-                        <img src="https://images.mykhel.com/webp/img/2025/09/ind-pak-asia-cup-2025-live-streaming1-1758460395.jpg" alt="Live Cricket" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
-                        📺
+                        <img src="https://images.mykhel.com/webp/img/2025/09/ind-pak-asia-cup-2025-live-streaming1-1758460395.jpg" alt="Live Cricket">
                     </div>
-                    <h3 class="movie-title">IND vs PAK </h3>
+                    <h3 class="movie-title">IND vs PAK</h3>
                     <a href="https://livecfdai-mp.slivcdn.com/out/v1/cfed49dc0449444bac761f9dd9155916/std_mdl-700300010_4.m3u8?hdntl=exp=1759113619~acl=*~hmac=8b5df6b14602649da371db21ef284ecdfd72f5a5301ccf0e92895ce3f1be8d45&originpath=/linear/hls/pb/event/6dEZMiaVRcGRWf7lwwBO7Q/stream/4053130c-62ea-48b3-95bc-331ff7f46084:SIN/variant/5f3000588990fd69e822ee104cea52a4/bandwidth/1663838.m3u8" class="watch-btn" target="_blank">Watch Live</a>
                 </div>
-                
-                
             </div>
         </section>
 
@@ -404,7 +445,7 @@
             <div class="community-panel glass">
                 <h2 class="community-title">Join Our Community</h2>
                 <p class="community-description">
-                    Get exclusive content, updates, and connect with fellow movie enthusiasts!
+                    Get exclusive content, updates, and help related to Website.
                 </p>
                 <div class="social-buttons">
                     <a href="https://t.me/+JAkrXg6_kvUyM2Nl" target="_blank" class="social-btn telegram-btn">
@@ -485,6 +526,4 @@
     </script>
 
 </body>
-
 </html>
-
